@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import UserInput from "./UserInput/UserInput";
-import UserOutput from "./UserOutput/UserOutput";
-
 class App extends Component {
   state = {
-    username: "Oleg"
+    textLength: 0
   };
 
-  changeUserName = event => {
-    this.setState({
-      username: event.target.value
-    });
+  handleInputChange = event => {
+    const length = event.target.value.length;
+
+    this.setState({ textLength: length });
   };
 
   render() {
     return (
       <div className="App">
-        <UserInput value={this.state.username} change={this.changeUserName} />
-        <UserOutput name={this.state.username} />
-        <UserOutput name={this.state.username} />
+        <input type="text" onChange={this.handleInputChange} />
+        <p>{this.state.textLength}</p>
       </div>
     );
   }
