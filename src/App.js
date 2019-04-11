@@ -6,16 +6,14 @@ import CharComponent from "./CharComponent/CharComponent";
 
 class App extends Component {
   state = {
-    textValue: "",
-    textLength: 0
+    textValue: ""
   };
 
   handleInputChange = event => {
     const value = event.target.value;
 
     this.setState({
-      textValue: value,
-      textLength: value.length
+      textValue: value
     });
   };
 
@@ -24,14 +22,19 @@ class App extends Component {
     const updatedText = text.slice(0, index) + text.slice(index + 1);
 
     this.setState({
-      textValue: updatedText,
-      textLength: this.state.textLength - 1
+      textValue: updatedText
     });
   };
 
   render() {
     const chars = this.state.textValue.split("").map((char, index) => {
-      return <CharComponent char={char} click={() => this.removeChar(index)} />;
+      return (
+        <CharComponent
+          char={char}
+          key={index}
+          click={() => this.removeChar(index)}
+        />
+      );
     });
 
     return (
@@ -41,8 +44,8 @@ class App extends Component {
           onChange={this.handleInputChange}
           value={this.state.textValue}
         />
-        <p>{this.state.textLength}</p>
-        <ValidationComponent length={this.state.textLength} />
+        <p>{this.state.textValue.length}</p>
+        <ValidationComponent length={this.state.textValue.length} />
         {chars}
       </div>
     );
